@@ -1,0 +1,14 @@
+# Dependency folders (Ye files npm install se wapas aa jati hain)
+node_modules/
+
+# Environment variables (Isme aapka Atlas Password aur API keys hoti hain)
+.env
+
+# Logs
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# OS metadata
+.DS_Store
+Thumbs.db
