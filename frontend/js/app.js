@@ -831,8 +831,7 @@ class VideoEditor {
 
     try {
 // app.js mein line 837 ke paas:
-const backendURL = 'http://localhost:5000/api/projects';
-      await fetch(backendURL, {
+const backendURL = 'https://cinema-backend.onrender.com/api/projects';      await fetch(backendURL, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(cleanState)
