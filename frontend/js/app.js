@@ -1,4 +1,5 @@
 // PROFESSIONAL VIDEO + AUDIO EDITOR v3.2 - 20+ HOLLYWOOD EFFECTS!
+// import { initEffects } from './effects.js';
 
 class VideoEditor {
   // TRIM
@@ -128,17 +129,74 @@ class VideoEditor {
     this.renderProperties();
   }
 
-  addEffectsCSS() {
-    const style = document.createElement('style');
-    style.textContent = `
-      .effect-category { padding:8px 16px;background:rgba(99,102,241,0.2);color:white;border-radius:20px;font-size:12px;font-weight:600;cursor:pointer;border:2px solid transparent;transition:all 0.2s;margin-right:8px; }
-      .effect-category.active, .effect-category:hover { background:rgba(99,102,241,0.6);border-color:#6366f1; }
-      .effect-group:hover .effect-intensity { opacity:1 !important; }
-      .effect-item.active { border-color:#10b981 !important; background:linear-gradient(135deg, rgba(16,185,129,0.3), rgba(16,185,129,0.1)) !important; }
-      .timeline-clip.selected { border-color:#10b981 !important; box-shadow:0 0 0 2px rgba(16,185,129,0.5) !important; }
-    `;
-    document.head.appendChild(style);
-  }
+ addEffectsCSS() {
+  const style = document.createElement('style');
+  style.textContent = `
+    :root {
+      --bg-dark: #0f172a;
+      --panel-bg: #1e293b;
+      --accent: #6366f1;
+      --accent-hover: #818cf8;
+      --success: #10b981;
+      --danger: #ef4444;
+      --text-main: #f8fafc;
+      --text-dim: #94a3b8;
+    }
+
+    /* Scrollbar Styling */
+    ::-webkit-scrollbar { width: 6px; height: 6px; }
+    ::-webkit-scrollbar-thumb { background: #334155; border-radius: 10px; }
+
+    /* General Panel Styling */
+    .panel-content { background: var(--panel-bg); border-radius: 12px; border: 1px solid rgba(255,255,255,0.05); }
+    
+    /* Effect Buttons & Categories */
+    .effect-category { 
+      padding: 10px 20px; background: rgba(99,102,241,0.1); color: var(--text-dim); 
+      border-radius: 30px; font-size: 13px; font-weight: 500; cursor: pointer; 
+      transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1); border: 1px solid transparent; 
+    }
+    .effect-category:hover { background: rgba(99,102,241,0.2); color: white; }
+    .effect-category.active { background: var(--accent); color: white; box-shadow: 0 4px 15px rgba(99,102,241,0.4); }
+
+    /* Effect Cards */
+    .effect-item {
+      background: rgba(15,23,42,0.6); border: 1px solid rgba(255,255,255,0.1);
+      border-radius: 16px; padding: 20px; transition: all 0.3s; cursor: pointer;
+      display: flex; flex-direction: column; align-items: center;
+    }
+    .effect-item:hover { transform: translateY(-5px); border-color: var(--accent); background: rgba(15,23,42,0.9); }
+    .effect-item.active { border-color: var(--success); background: linear-gradient(145deg, rgba(16,185,129,0.15), rgba(15,23,42,0.8)); }
+
+    /* Timeline Clips */
+    .timeline-clip {
+      transition: transform 0.2s, box-shadow 0.2s;
+      overflow: hidden; backdrop-filter: blur(4px);
+    }
+    .timeline-clip:hover { filter: brightness(1.2); cursor: grab; }
+    .timeline-clip.selected { 
+      border: 2px solid white !important; 
+      box-shadow: 0 0 20px rgba(16,185,129,0.4) !important;
+      z-index: 10;
+    }
+
+    /* Inputs & Sliders */
+    input[type="range"] { accent-color: var(--accent); cursor: pointer; }
+    input[type="number"], input[type="text"] {
+      background: #0f172a !important; border: 1px solid #334155 !important;
+      color: white !important; transition: border 0.3s;
+    }
+    input:focus { border-color: var(--accent) !important; outline: none; }
+
+    /* Buttons Style */
+    button {
+      text-transform: uppercase; letter-spacing: 1px;
+      transition: all 0.2s ease;
+    }
+    button:active { transform: scale(0.95); }
+  `;
+  document.head.appendChild(style);
+}
 
   cacheDOM() {
     this.dom = {
@@ -540,26 +598,28 @@ class VideoEditor {
         <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(140px,1fr));gap:16px;">
           ${this.state.effects.map(effect => `
             <div class="effect-group" data-effect="${effect}">
-              <div class="effect-item ${this.isEffectApplied(effect) ? 'active' : ''}" data-effect="${effect}" style="
-                padding:20px;background:linear-gradient(135deg, rgba(99,102,241,0.2), rgba(99,102,241,0.1));
-                border:2px solid rgba(99,102,241,${this.isEffectApplied(effect) ? '0.6' : '0.3'});border-radius:12px;
-                cursor:pointer;transition:all 0.3s;position:relative;overflow:hidden;
-              ">
+              <div class="effect-item ${this.isEffectApplied(effect) ? 'active' : ''}" data-effect="${effect}">
                 <div style="font-size:28px;margin-bottom:12px;">FX</div>
                 <div style="font-size:13px;font-weight:600;color:white;text-align:center;">${effect.replace(/-/g, ' ').replace(/\b\w/g, l => l.toUpperCase())}</div>
-                ${this.isEffectApplied(effect) ? '<div style="position:absolute;top:4px;right:4px;background:#10b981;color:white;padding:2px 6px;border-radius:10px;font-size:10px;font-weight:600;">ON</div>' : ''}
               </div>
               <div style="margin-top:8px;opacity:${this.isEffectApplied(effect) ? '1' : '0'};transition:opacity 0.2s;">
-                <input type="range" class="effect-intensity" min="0" max="2" step="0.1" value="${this.getEffectIntensity(effect)}" style="
-                  width:100%;height:4px;background:linear-gradient(90deg, #6366f1, #10b981);border-radius:2px;outline:none;
-                ">
-                <div style="font-size:11px;color:#9ca3af;text-align:center;margin-top:4px;">Intensity: ${this.getEffectIntensity(effect) * 100}%</div>
+                <input type="range" class="effect-intensity" min="0" max="2" step="0.1" value="${this.getEffectIntensity(effect)}">
+                <div class="effect-intensity-label">Intensity: ${Math.round(this.getEffectIntensity(effect) * 100)}%</div>
               </div>
             </div>
           `).join('')}
         </div>
       </div>
     `;
+
+    // Add event listeners for intensity sliders
+    this.dom.effectsList.querySelectorAll('.effect-intensity').forEach(slider => {
+      slider.addEventListener('input', (e) => {
+        const effectName = e.target.closest('.effect-group').dataset.effect;
+        this.updateEffectIntensity(effectName, e.target.value);
+        e.target.nextElementSibling.textContent = `Intensity: ${Math.round(e.target.value * 100)}%`;
+      });
+    });
   }
 
   isEffectApplied(effectName) {
@@ -755,7 +815,12 @@ class VideoEditor {
     document.querySelectorAll('.panel-content').forEach(p => p.classList.remove('active'));
     document.querySelectorAll('.panel-tab').forEach(t => t.classList.remove('active'));
     document.getElementById(panelId)?.classList.add('active');
-    event?.target?.classList.remove('active');
+    document.querySelector(`[data-panel="${panelId}"]`)?.classList.add('active');
+
+    // Render effects when effects panel is activated
+    if (panelId === 'effectsPanel') {
+      this.renderEffects();
+    }
   }
 
   zoomTimeline(factor) {
@@ -922,6 +987,12 @@ const backendURL = 'https://cinema-backend.onrender.com/api/projects';      awai
   }}  
 document.addEventListener('DOMContentLoaded', () => {
   window.editor = new VideoEditor();
+
+  // Initialize effects system (commented out to avoid conflicts)
+  // initEffects(window.editor.state, window.editor.dom, window.editor);
+
+  // Initial render of effects
+  window.editor.renderEffects();
 
   // console.log('VIDEO EDITOR v3.2 - 20+ HOLLYWOOD EFFECTS!');
   // console.log('SAVE = Save Project | EXPORT = Export Summary');

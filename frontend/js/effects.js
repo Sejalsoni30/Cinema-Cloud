@@ -270,3 +270,5 @@ export function initEffects(state, dom, editor) {
         showNotification
     };
 }
+
+export { initEffects };

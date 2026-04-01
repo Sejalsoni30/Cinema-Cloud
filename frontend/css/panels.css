@@ -1,147 +1,240 @@
-/* 🔥 PANELS CSS - Tumhare HTML ke liye perfect */
+/* 🔥 MODERN PANELS CSS - Professional Platform Design */
 .panel-tabs {
   display: flex;
-  gap: 1px;
-  background: rgba(31, 41, 55, 0.8);
-  border-radius: 8px;
+  gap: 6px;
+  background: rgba(255, 255, 255, 0.02);
+  border-radius: 16px;
   overflow: hidden;
-  margin-bottom: 16px;
+  margin-bottom: 20px;
+  animation: fadeInScale 0.6s ease;
+  backdrop-filter: blur(12px);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  padding: 4px;
 }
 
 .panel-tab {
   flex: 1;
-  padding: 12px 8px;
-  background: rgba(15, 23, 42, 0.6);
+  padding: 14px 18px;
+  background: transparent;
   border: none;
-  color: #9ca3af;
-  font-size: 12px;
-  font-weight: 500;
+  color: #94a3b8;
+  font-size: 13px;
+  font-weight: 600;
+  letter-spacing: 0.025em;
   cursor: pointer;
-  transition: all 0.2s ease;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  position: relative;
+  text-transform: uppercase;
+  font-size: 11px;
+  border-radius: 12px;
+}
+
+.panel-tab::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.08), transparent);
+  transition: left 0.4s;
+  border-radius: 12px;
+}
+
+.panel-tab:hover::before {
+  left: 100%;
 }
 
 .panel-tab.active {
-  background: linear-gradient(135deg, #6366f1, #4f46e5);
+  background: linear-gradient(135deg, #6366f1, #8b5cf6, #06b6d4);
   color: white;
+  transform: scale(1.02);
+  box-shadow: 0 4px 16px rgba(99, 102, 241, 0.4);
+  font-weight: 700;
 }
 
 .panel-tab:hover:not(.active) {
-  background: rgba(99, 102, 241, 0.2);
-  color: white;
+  background: rgba(255, 255, 255, 0.05);
+  color: #e2e8f0;
+  transform: translateY(-1px);
 }
 
 .panel-content {
   display: none;
+  animation: fadeInUp 0.5s ease;
 }
 
 .panel-content.active {
   display: block;
+  animation: fadeInUp 0.5s ease;
 }
 
 .panel-header {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  margin-bottom: 20px;
-  padding-bottom: 12px;
-  border-bottom: 1px solid rgba(99, 102, 241, 0.3);
+  margin-bottom: 24px;
+  padding-bottom: 16px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+  animation: slideInLeft 0.4s ease;
 }
 
 .panel-header h2 {
   margin: 0;
-  font-size: 14px;
-  font-weight: 600;
-  color: #e5e7eb;
+  font-size: 16px;
+  font-weight: 700;
+  color: #ffffff;
   text-transform: uppercase;
   letter-spacing: 0.05em;
+  background: linear-gradient(135deg, #ffffff, #e2e8f0);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
 }
 
 .file-input-label {
-  padding: 8px 16px;
-  background: linear-gradient(135deg, rgba(99, 102, 241, 0.2), rgba(79, 70, 229, 0.2));
-  border: 2px dashed rgba(99, 102, 241, 0.5);
-  border-radius: 8px;
+  padding: 16px 24px;
+  background: linear-gradient(135deg, rgba(99, 102, 241, 0.1), rgba(139, 92, 246, 0.1));
+  border: 2px dashed rgba(99, 102, 241, 0.3);
+  border-radius: 12px;
   cursor: pointer;
-  font-size: 12px;
+  font-size: 14px;
+  font-weight: 600;
   color: #cbd5f5;
-  transition: all 0.2s ease;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  text-align: center;
+  position: relative;
+  overflow: hidden;
+  backdrop-filter: blur(10px);
+}
+
+.file-input-label::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(99, 102, 241, 0.1), transparent);
+  transition: left 0.6s;
+}
+
+.file-input-label:hover::before {
+  left: 100%;
 }
 
 .file-input-label:hover {
-  background: linear-gradient(135deg, rgba(99, 102, 241, 0.3), rgba(79, 70, 229, 0.3));
+  background: linear-gradient(135deg, rgba(99, 102, 241, 0.15), rgba(139, 92, 246, 0.15));
   border-color: #6366f1;
+  transform: translateY(-2px) scale(1.01);
+  box-shadow: 0 8px 25px rgba(99, 102, 241, 0.3);
 }
 
 .media-list, .effects-list, .audio-track-list {
   display: flex;
   flex-direction: column;
-  gap: 12px;
+  gap: 16px;
   max-height: 400px;
   overflow-y: auto;
+  animation: fadeInUp 0.6s ease;
 }
 
 .preview-wrapper {
   position: relative;
   height: 320px;
   background: #000;
-  border-radius: 12px;
+  border-radius: 16px;
   overflow: hidden;
   margin-bottom: 16px;
+  animation: fadeInScale 0.6s ease;
+  transition: all 0.3s ease;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+}
+
+.preview-wrapper:hover {
+  box-shadow: 0 20px 60px rgba(5, 8, 22, 0.8);
+  transform: scale(1.01);
 }
 
 .preview-video, .preview-canvas {
   width: 100%;
   height: 100%;
   object-fit: contain;
+  transition: all 0.3s ease;
 }
 
 .preview-controls {
   display: flex;
   align-items: center;
-  gap: 12px;
+  gap: 16px;
   justify-content: center;
+  animation: slideInLeft 0.5s ease;
 }
 
 .btn.icon {
-  width: 44px;
-  height: 44px;
+  width: 52px;
+  height: 52px;
   border-radius: 50%;
-  font-size: 16px;
+  font-size: 18px;
   display: flex;
   align-items: center;
   justify-content: center;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  backdrop-filter: blur(10px);
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.btn.icon:hover {
+  transform: rotate(360deg) scale(1.1);
+  transition: transform 0.6s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+  background: rgba(255, 255, 255, 0.1);
+  box-shadow: 0 4px 16px rgba(99, 102, 241, 0.3);
 }
 
 .timecode {
-  font-family: monospace;
+  font-family: 'JetBrains Mono', monospace;
   font-size: 14px;
   color: #cbd5f5;
   min-width: 120px;
   text-align: center;
+  animation: pulse 2s infinite;
+  background: rgba(255, 255, 255, 0.02);
+  padding: 8px 16px;
+  border-radius: 8px;
+  border: 1px solid rgba(255, 255, 255, 0.08);
 }
 
 .project-settings-form {
   display: flex;
   flex-direction: column;
-  gap: 16px;
+  gap: 20px;
+  animation: fadeInUp 0.5s ease;
 }
 
 .project-settings-form label {
   display: flex;
   flex-direction: column;
-  gap: 6px;
-  font-size: 12px;
-  color: #9ca3af;
+  gap: 8px;
+  font-size: 13px;
+  font-weight: 600;
+  color: #e2e8f0;
+  text-transform: uppercase;
+  letter-spacing: 0.025em;
+  font-size: 11px;
 }
 
 .project-settings-form input,
 .project-settings-form select {
-  padding: 10px 12px;
-  border: 1px solid rgba(99, 102, 241, 0.3);
-  border-radius: 8px;
-  background: rgba(15, 23, 42, 0.8);
-  color: white;
-  font-size: 13px;
+  padding: 14px 16px;
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  border-radius: 12px;
+  background: rgba(255, 255, 255, 0.02);
+  backdrop-filter: blur(10px);
+  color: #ffffff;
+  font-size: 14px;
+  font-weight: 500;
+  transition: all 0.3s ease;
 }
 
 .project-settings-form input:focus,
@@ -149,10 +242,273 @@
   outline: none;
   border-color: #6366f1;
   box-shadow: 0 0 0 3px rgba(99, 102, 241, 0.1);
+  background: rgba(255, 255, 255, 0.05);
+  transform: scale(1.01);
 }
 
 .properties-content {
-  padding: 20px;
-  color: #9ca3af;
+  padding: 24px;
+  color: #94a3b8;
   text-align: center;
+  animation: fadeInScale 0.4s ease;
+  background: rgba(255, 255, 255, 0.02);
+  border-radius: 12px;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  backdrop-filter: blur(10px);
+}
+
+/* AUDIO EFFECTS STYLES - Modern Cards */
+.audio-effect-group {
+  background: linear-gradient(135deg, rgba(255, 255, 255, 0.03), rgba(255, 255, 255, 0.01));
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 16px;
+  padding: 20px;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  animation: fadeInUp 0.4s ease;
+  animation-fill-mode: both;
+  backdrop-filter: blur(12px);
+  position: relative;
+  overflow: hidden;
+}
+
+.audio-effect-group:nth-child(1) { animation-delay: 0.1s; }
+.audio-effect-group:nth-child(2) { animation-delay: 0.2s; }
+.audio-effect-group:nth-child(3) { animation-delay: 0.3s; }
+.audio-effect-group:nth-child(4) { animation-delay: 0.4s; }
+
+.audio-effect-group::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(99, 102, 241, 0.05), transparent);
+  transition: left 0.6s;
+}
+
+.audio-effect-group:hover::before {
+  left: 100%;
+}
+
+.audio-effect-group:hover {
+  transform: translateY(-6px) scale(1.02);
+  box-shadow: 0 12px 32px rgba(99, 102, 241, 0.2);
+  border-color: rgba(99, 102, 241, 0.3);
+}
+
+.audio-effect-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 12px;
+  padding: 16px;
+  border-radius: 12px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  background: rgba(99, 102, 241, 0.05);
+  border: 1px solid rgba(99, 102, 241, 0.1);
+}
+
+.audio-effect-item:hover {
+  background: rgba(99, 102, 241, 0.1);
+  transform: scale(1.05);
+  border-color: rgba(99, 102, 241, 0.3);
+}
+
+.audio-effect-item.active {
+  background: linear-gradient(135deg, #6366f1, #8b5cf6);
+  animation: bounceIn 0.3s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+  border-color: #6366f1;
+  box-shadow: 0 4px 16px rgba(99, 102, 241, 0.4);
+}
+
+.audio-intensity {
+  width: 100%;
+  height: 8px;
+  border-radius: 4px;
+  background: rgba(255, 255, 255, 0.1);
+  outline: none;
+  transition: all 0.2s ease;
+  cursor: pointer;
+}
+
+.audio-intensity::-webkit-slider-thumb {
+  appearance: none;
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, #6366f1, #8b5cf6);
+  cursor: pointer;
+  box-shadow: 0 2px 8px rgba(99, 102, 241, 0.4);
+  transition: all 0.2s ease;
+  border: 2px solid rgba(255, 255, 255, 0.2);
+}
+
+.audio-intensity::-webkit-slider-thumb:hover {
+  transform: scale(1.2);
+  box-shadow: 0 4px 12px rgba(99, 102, 241, 0.6);
+}
+
+.audio-intensity::-moz-range-thumb {
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, #6366f1, #8b5cf6);
+  cursor: pointer;
+  border: 2px solid rgba(255, 255, 255, 0.2);
+  box-shadow: 0 2px 8px rgba(99, 102, 241, 0.4);
+}
+
+/* VIDEO EFFECTS STYLES - Modern Cards */
+.effect-group {
+  background: linear-gradient(135deg, rgba(255, 255, 255, 0.03), rgba(255, 255, 255, 0.01));
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 16px;
+  padding: 16px;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  animation: fadeInUp 0.4s ease;
+  animation-fill-mode: both;
+  backdrop-filter: blur(12px);
+  position: relative;
+  overflow: hidden;
+}
+
+.effect-group:nth-child(1) { animation-delay: 0.1s; }
+.effect-group:nth-child(2) { animation-delay: 0.2s; }
+.effect-group:nth-child(3) { animation-delay: 0.3s; }
+.effect-group:nth-child(4) { animation-delay: 0.4s; }
+.effect-group:nth-child(5) { animation-delay: 0.5s; }
+.effect-group:nth-child(6) { animation-delay: 0.6s; }
+
+.effect-group::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(99, 102, 241, 0.05), transparent);
+  transition: left 0.6s;
+}
+
+.effect-group:hover::before {
+  left: 100%;
+}
+
+.effect-group:hover {
+  transform: translateY(-4px) scale(1.02);
+  box-shadow: 0 8px 25px rgba(99, 102, 241, 0.2);
+  border-color: rgba(99, 102, 241, 0.3);
+}
+
+.effect-item {
+  padding: 20px;
+  background: linear-gradient(135deg, rgba(99, 102, 241, 0.1), rgba(99, 102, 241, 0.05));
+  border: 2px solid rgba(99, 102, 241, 0.3);
+  border-radius: 12px;
+  cursor: pointer;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  position: relative;
+  overflow: hidden;
+  text-align: center;
+}
+
+.effect-item:hover {
+  background: linear-gradient(135deg, rgba(99, 102, 241, 0.15), rgba(99, 102, 241, 0.1));
+  transform: translateY(-2px);
+  border-color: rgba(99, 102, 241, 0.5);
+  box-shadow: 0 4px 16px rgba(99, 102, 241, 0.3);
+}
+
+.effect-item.active {
+  background: linear-gradient(135deg, #6366f1, #8b5cf6);
+  border-color: #6366f1;
+  animation: bounceIn 0.3s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+  box-shadow: 0 4px 16px rgba(99, 102, 241, 0.4);
+}
+
+.effect-item.active::after {
+  content: 'ON';
+  position: absolute;
+  top: 8px;
+  right: 8px;
+  background: #10b981;
+  color: white;
+  padding: 2px 8px;
+  border-radius: 12px;
+  font-size: 10px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.025em;
+}
+
+.effect-intensity {
+  width: 100%;
+  height: 6px;
+  border-radius: 3px;
+  background: rgba(255, 255, 255, 0.1);
+  outline: none;
+  transition: all 0.2s ease;
+  cursor: pointer;
+  margin-top: 12px;
+}
+
+.effect-intensity::-webkit-slider-thumb {
+  appearance: none;
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, #6366f1, #8b5cf6);
+  cursor: pointer;
+  box-shadow: 0 2px 8px rgba(99, 102, 241, 0.4);
+  transition: all 0.2s ease;
+  border: 2px solid rgba(255, 255, 255, 0.2);
+}
+
+.effect-intensity::-webkit-slider-thumb:hover {
+  transform: scale(1.2);
+  box-shadow: 0 4px 12px rgba(99, 102, 241, 0.6);
+}
+
+.effect-intensity::-moz-range-thumb {
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, #6366f1, #8b5cf6);
+  cursor: pointer;
+  border: 2px solid rgba(255, 255, 255, 0.2);
+  box-shadow: 0 2px 8px rgba(99, 102, 241, 0.4);
+}
+
+.effect-intensity-label {
+  font-size: 11px;
+  color: #94a3b8;
+  text-align: center;
+  margin-top: 8px;
+  font-weight: 500;
+}
+
+.effect-category {
+  padding: 8px 16px;
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 20px;
+  cursor: pointer;
+  font-size: 12px;
+  font-weight: 600;
+  color: #cbd5f5;
+  transition: all 0.3s ease;
+  white-space: nowrap;
+}
+
+.effect-category:hover {
+  background: rgba(255, 255, 255, 0.1);
+  transform: translateY(-1px);
+}
+
+.effect-category.active {
+  background: linear-gradient(135deg, #6366f1, #8b5cf6);
+  color: white;
+  box-shadow: 0 2px 8px rgba(99, 102, 241, 0.3);
 }
